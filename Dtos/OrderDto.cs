@@ -8,5 +8,5 @@ public class OrderDto
 
     public string CustomerName { get; set; }
 
-    public List<ProductOrderDto> ProductOrders { get; set; }
+    public List<ProductOrderDto> ProductOrders { get; set; } = new List<ProductOrderDto>();
 }

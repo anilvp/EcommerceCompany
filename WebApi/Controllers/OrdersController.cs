@@ -9,10 +9,12 @@ namespace WebApi.Controllers;
 public class OrdersController : ControllerBase
 {
     private readonly ICreateOrders _createOrder;
+    private readonly IFindOrders _findOrder;
 
-    public OrdersController(ICreateOrders createOrder)
+    public OrdersController(ICreateOrders createOrder, IFindOrders findOrder)
     {
         _createOrder = createOrder;
+        _findOrder = findOrder;
     }
 
     [HttpPost]
@@ -24,5 +26,12 @@ public class OrdersController : ControllerBase
         }
 
         _createOrder.Add(dto);
+    }
+
+    [HttpGet]
+    public OrderDto FindOrder(int orderId)
+    {
+        OrderDto dto = _findOrder.FindOrder(orderId);
+        return dto;
     }
 }

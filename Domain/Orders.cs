@@ -24,7 +24,7 @@ public class Orders
 
     public DateTime? Date { get; private set; }
 
-    public int? CustomerId { get; private set; }
+    public int CustomerId { get; private set; }
 
     public string Address { get; private set; }
 

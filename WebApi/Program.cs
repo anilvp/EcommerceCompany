@@ -21,7 +21,8 @@ builder.Services.AddScoped<DbContext, ECommerceCompanyContext>()
     .AddTransient<IGenericRepository<Orders>, GenericRepository<Orders>>()
     .AddTransient<IGenericRepository<ProductOrders>, GenericRepository<ProductOrders>>()
     .AddTransient<IGenericRepository<Products>, GenericRepository<Products>>()
-    .AddTransient<ICreateOrders, OrderCreator>();
+    .AddTransient<ICreateOrders, OrderCreator>()
+    .AddTransient<IFindOrders, OrderFinder>();
 
 
 builder.Services.AddControllers();
