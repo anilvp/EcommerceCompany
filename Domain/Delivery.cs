@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Domain;
 
-public class Deliveries
+public class Delivery
 {
-    private Deliveries() { }
+    private Delivery() { }
 
     public int DeliveryId { get; private set; }
 
@@ -17,5 +17,5 @@ public class Deliveries
 
     public DateTime? Date { get; private set; }
 
-    public virtual Orders Order { get; private set; }
+    public virtual Order Order { get; private set; }
 }

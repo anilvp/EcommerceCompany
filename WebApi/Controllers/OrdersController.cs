@@ -18,20 +18,20 @@ public class OrdersController : ControllerBase
     }
 
     [HttpPost]
-    public void CreateOrder([FromBody] OrderDto dto)
+    public IActionResult CreateOrder([FromBody] OrderDto dto)
     {
         if (dto == null)
         {
             throw new ArgumentNullException(nameof(dto));
         }
-
         _createOrder.Add(dto);
+        return Ok();
     }
 
     [HttpGet]
-    public OrderDto FindOrder(int orderId)
+    public ActionResult<OrderDto> FindOrder(int orderId)
     {
         OrderDto dto = _findOrder.FindOrder(orderId);
-        return dto;
+        return Ok(dto);
     }
 }

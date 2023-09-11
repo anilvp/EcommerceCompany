@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Mapping;
 
-public class ProductsMap : IEntityTypeConfiguration<Products>
+public class ProductsMap : IEntityTypeConfiguration<Product>
 {
-    public void Configure(EntityTypeBuilder<Products> builder, string schema)
+    public void Configure(EntityTypeBuilder<Product> builder, string schema)
     {
         builder.HasKey(e => e.ProductId);
 
@@ -23,7 +23,7 @@ public class ProductsMap : IEntityTypeConfiguration<Products>
             .IsFixedLength();
         builder.Property(e => e.Price).HasColumnType("decimal(10, 2)");
     }
-    public void Configure(EntityTypeBuilder<Products> builder)
+    public void Configure(EntityTypeBuilder<Product> builder)
     {
         Configure(builder, "dbo");
     }

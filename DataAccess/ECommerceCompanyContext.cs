@@ -19,15 +19,15 @@ public partial class ECommerceCompanyContext : DbContext
     {
     }
 
-    public virtual DbSet<Customers> Customers { get; set; }
+    public virtual DbSet<Customer> Customers { get; set; }
 
-    public virtual DbSet<Deliveries> Deliveries { get; set; }
+    public virtual DbSet<Delivery> Deliveries { get; set; }
 
-    public virtual DbSet<Orders> Orders { get; set; }
+    public virtual DbSet<Order> Orders { get; set; }
 
-    public virtual DbSet<ProductOrders> ProductOrders { get; set; }
+    public virtual DbSet<ProductOrder> ProductOrders { get; set; }
 
-    public virtual DbSet<Products> Products { get; set; }
+    public virtual DbSet<Product> Products { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

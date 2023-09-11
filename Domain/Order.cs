@@ -5,14 +5,19 @@ using System.Collections.Generic;
 
 namespace Domain;
 
-public class Orders
+public class Order
 {
-    private Orders() { }
+    private Order() 
+    {
+        Deliveries = new List<Delivery>();
+        ProductOrders = new List<ProductOrder>();
+    }
 
-    public Orders(int customerId, string address, List<ProductOrders> productOrders)
+    //Ids are handled by entity framework
+    public Order(/*int customerId,*/ string address, List<ProductOrder> productOrders) : this()
     {
         Date = DateTime.Now;
-        CustomerId = customerId;
+        //CustomerId = customerId;
         Address = address;
         foreach (var productOrder in productOrders)
         {
@@ -28,9 +33,9 @@ public class Orders
 
     public string Address { get; private set; }
 
-    public virtual Customers Customer { get; private set; }
+    public virtual Customer Customer { get; private set; }
 
-    public virtual ICollection<Deliveries> Deliveries { get; private set; } = new List<Deliveries>();
+    public virtual ICollection<Delivery> Deliveries { get; private set; } 
 
-    public virtual ICollection<ProductOrders> ProductOrders { get; private set; } = new List<ProductOrders>();
+    public virtual ICollection<ProductOrder> ProductOrders { get; private set; }
 }

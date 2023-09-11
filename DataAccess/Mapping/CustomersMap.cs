@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataAccess.Mapping;
 
-public class CustomersMap : IEntityTypeConfiguration<Customers>
+public class CustomersMap : IEntityTypeConfiguration<Customer>
 {
-    public void Configure(EntityTypeBuilder<Customers> builder, string schema)
+    public void Configure(EntityTypeBuilder<Customer> builder, string schema)
     {
         builder.HasKey(e => e.CustomerId);
 
@@ -22,7 +22,7 @@ public class CustomersMap : IEntityTypeConfiguration<Customers>
             .HasMaxLength(10)
             .IsFixedLength();
     }
-    public void Configure(EntityTypeBuilder<Customers> builder)
+    public void Configure(EntityTypeBuilder<Customer> builder)
     {
         Configure(builder, "dbo");
     }

@@ -8,35 +8,33 @@ namespace Application;
 
 public class OrderFinder : IFindOrders
 {
-    private readonly IUnitOfWork _uow;
-    private readonly IGenericRepository<Orders> _ordersRepo;
-    private readonly IGenericRepository<Customers> _customersRepo;
-    private readonly IGenericRepository<ProductOrders> _productOrdersRepo;
+    private readonly IGenericRepository<Order> _ordersRepo;
 
-    public OrderFinder(IUnitOfWork uow, IGenericRepository<Orders> ordersRepo, IGenericRepository<Customers> customersRepo,
-                       IGenericRepository<ProductOrders> productOrdersRepo)
+    public OrderFinder(IGenericRepository<Order> ordersRepo)
     {
-        _uow = uow;
         _ordersRepo = ordersRepo;
-        _customersRepo = customersRepo;
-        _productOrdersRepo = productOrdersRepo;
     }
 
     public OrderDto FindOrder(int orderId)
     {
-        OrderDto orderDto = new OrderDto();
-        var order = _ordersRepo.GetById(orderId);
-        orderDto.CustomerId = order.CustomerId;
-        orderDto.Address = order.Address;
-        var customer = _customersRepo.GetById(order.CustomerId);
-        orderDto.CustomerName = customer.Name;
-        foreach (var productOrder in _productOrdersRepo.Get(x => x.OrderId == orderId))
+        var orderDto = _ordersRepo.Get(x => x.OrderId == orderId)
+            .Select(x => new OrderDto()
+            {
+                Address = x.Address,
+                CustomerId = x.CustomerId,
+                CustomerName = x.Customer.Name,
+                ProductOrders = x.ProductOrders.Select(y => new ProductOrderDto()
+                {
+                    ProductId = y.ProductId,
+                    Price = y.Price,
+                    Quantity = y.Quantity
+                }
+                ).ToList()
+            }
+            ).Single();
+        if (orderDto == null)
         {
-            ProductOrderDto productOrderDto = new ProductOrderDto();
-            productOrderDto.ProductId = productOrder.ProductId;
-            productOrderDto.Price = productOrder.Price;
-            productOrderDto.Quantity = productOrder.Quantity;
-            orderDto.ProductOrders.Add(productOrderDto);
+            throw new Exception("No order found with order ID: " + orderId);
         }
         return orderDto;
     }

@@ -16,11 +16,11 @@ builder.Services.AddMvc().AddControllersAsServices();
 builder.Services.AddDbContext<ECommerceCompanyContext>(options => options.UseSqlServer(connstr));
 builder.Services.AddScoped<DbContext, ECommerceCompanyContext>()
     .AddScoped<IUnitOfWork, UnitOfWork>()
-    .AddTransient<IGenericRepository<Customers>, GenericRepository<Customers>>()
-    .AddTransient<IGenericRepository<Deliveries>, GenericRepository<Deliveries>>()
-    .AddTransient<IGenericRepository<Orders>, GenericRepository<Orders>>()
-    .AddTransient<IGenericRepository<ProductOrders>, GenericRepository<ProductOrders>>()
-    .AddTransient<IGenericRepository<Products>, GenericRepository<Products>>()
+    .AddTransient<IGenericRepository<Customer>, GenericRepository<Customer>>()
+    .AddTransient<IGenericRepository<Delivery>, GenericRepository<Delivery>>()
+    .AddTransient<IGenericRepository<Order>, GenericRepository<Order>>()
+    .AddTransient<IGenericRepository<ProductOrder>, GenericRepository<ProductOrder>>()
+    .AddTransient<IGenericRepository<Product>, GenericRepository<Product>>()
     .AddTransient<ICreateOrders, OrderCreator>()
     .AddTransient<IFindOrders, OrderFinder>();
 

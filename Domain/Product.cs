@@ -5,9 +5,12 @@ using System.Collections.Generic;
 
 namespace Domain;
 
-public class Products
+public class Product
 {
-    private Products() { }
+    private Product() 
+    {
+        ProductOrders = new List<ProductOrder>();
+    }
 
     public int ProductId { get; private set; }
 
@@ -15,5 +18,5 @@ public class Products
 
     public decimal? Price { get; private set; }
 
-    public virtual ICollection<ProductOrders> ProductOrders { get; private set; } = new List<ProductOrders>();
+    public virtual ICollection<ProductOrder> ProductOrders { get; private set; }
 }

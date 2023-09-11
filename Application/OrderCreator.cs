@@ -9,14 +9,12 @@ namespace Application;
 public class OrderCreator : ICreateOrders
 {
     private readonly IUnitOfWork _uow;
-    private readonly IGenericRepository<Customers> _customersRepo;
-    private readonly IGenericRepository<Orders> _ordersRepo;
+    private readonly IGenericRepository<Customer> _customersRepo;
 
-    public OrderCreator(IUnitOfWork uow, IGenericRepository<Customers> customersRepo, IGenericRepository<Orders> ordersRepo)
+    public OrderCreator(IUnitOfWork uow, IGenericRepository<Customer> customersRepo)
     {
         _uow = uow;
         _customersRepo = customersRepo;
-        _ordersRepo = ordersRepo;
     }
 
     public void Add(OrderDto orderDto)
@@ -24,17 +22,17 @@ public class OrderCreator : ICreateOrders
         var customer = _customersRepo.GetById(orderDto.CustomerId);
         if (customer == null)
         {
-            customer = new Customers(orderDto.CustomerName);
+            customer = new Customer(orderDto.CustomerName);
             _customersRepo.Insert(customer);
         }
-        List<ProductOrders> productOrders = new List<ProductOrders>();
+        List<ProductOrder> productOrders = new List<ProductOrder>();
         foreach (var productOrderDto in orderDto.ProductOrders)
         {
-            ProductOrders productOrder = new ProductOrders(productOrderDto.ProductId, productOrderDto.Price, productOrderDto.Quantity);
+            ProductOrder productOrder = new ProductOrder(productOrderDto.ProductId, productOrderDto.Price, productOrderDto.Quantity);
             productOrders.Add(productOrder);
         }
-        var order = customer.CreateOrder(orderDto.CustomerId, orderDto.Address, productOrders);
-        _ordersRepo.Insert(order);
+        /*var order = */customer.CreateOrder(/*orderDto.CustomerId,*/ orderDto.Address, productOrders);
+        //_ordersRepo.Insert(order); DON'T NEED THIS LINE
         _uow.Save();
     }
 }

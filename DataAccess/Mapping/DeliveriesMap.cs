@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Mapping;
 
-public class DeliveriesMap : IEntityTypeConfiguration<Deliveries>
+public class DeliveriesMap : IEntityTypeConfiguration<Delivery>
 {
-    public void Configure(EntityTypeBuilder<Deliveries> builder, string schema)
+    public void Configure(EntityTypeBuilder<Delivery> builder, string schema)
     {
         builder.HasKey(e => e.DeliveryId);
 
@@ -25,7 +25,7 @@ public class DeliveriesMap : IEntityTypeConfiguration<Deliveries>
             .HasForeignKey(d => d.OrderId)
             .HasConstraintName("FK_Deliveries_Orders");
     }
-    public void Configure(EntityTypeBuilder<Deliveries> builder)
+    public void Configure(EntityTypeBuilder<Delivery> builder)
     {
         Configure(builder, "dbo");
     }

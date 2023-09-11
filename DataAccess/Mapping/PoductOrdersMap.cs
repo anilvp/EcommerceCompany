@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Mapping;
 
-public class ProductOrdersMap : IEntityTypeConfiguration<ProductOrders>
+public class ProductOrdersMap : IEntityTypeConfiguration<ProductOrder>
 {
-    public void Configure(EntityTypeBuilder<ProductOrders> builder, string schema)
+    public void Configure(EntityTypeBuilder<ProductOrder> builder, string schema)
     {
         builder.HasKey(e => new { e.OrderId, e.ProductId });
 
@@ -31,7 +31,7 @@ public class ProductOrdersMap : IEntityTypeConfiguration<ProductOrders>
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("FK_Product Orders_Products");
     }
-    public void Configure(EntityTypeBuilder<ProductOrders> builder)
+    public void Configure(EntityTypeBuilder<ProductOrder> builder)
     {
         Configure(builder, "dbo");
     }

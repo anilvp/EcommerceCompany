@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace Domain;
 
-public class ProductOrders
+public class ProductOrder
 {
-    private ProductOrders() { }
+    private ProductOrder() { }
 
-    public ProductOrders(int productId, decimal price, int quantity)
+    public ProductOrder(int productId, decimal price, int quantity) : this()
     {
         ProductId = productId;
         Price = price;
@@ -24,7 +24,7 @@ public class ProductOrders
 
     public int Quantity { get; private set; }
 
-    public virtual Orders Order { get; private set; }
+    public virtual Order Order { get; private set; }
 
-    public virtual Products Product { get; private set; }
+    public virtual Product Product { get; private set; }
 }
